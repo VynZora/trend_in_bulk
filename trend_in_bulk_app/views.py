@@ -584,4 +584,4 @@ def team_delete(request, pk):
 
 
 def page_not_found(request, exception=None):
-    return render(request, "404.html", status=404)
+    return render(request, "frontend/404.html", status=404)
