@@ -3979,10 +3979,10 @@ About Area
   }
 }
 
-/* .aboutarea__5__img {
-  background-image: url(../img/about/about_8.png);
+.aboutarea__5__img {
+ 
   position: relative;
-} */
+}
 .aboutarea__5__img img {
   width: 100%;
   border-radius: 10px;
@@ -6027,7 +6027,7 @@ Event
 Register Area
 -------------------------------*/
 .registerarea {
-  background-image: url(../img/register/register__bg.png);
+  
   position: relative;
   margin-bottom: 150px;
 }
@@ -12798,4 +12798,4 @@ Dark Mode
 }
 .is_dark .search__form .search__form__categories {
   background: var(--blackColor);
-}/*# sourceMappingURL=style.css.map */
+}

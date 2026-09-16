@@ -19,7 +19,7 @@ ENV/
 # media/
 
 # # Static files (collected)
-# staticfiles/
+ staticfiles/
 
 # Environment variables
 .env
@@ -41,3 +41,11 @@ htmlcov/
 .idea/
 
 static/*.mp4
+# Django collected static files
+staticfiles/
+
+# Django collected static files
+staticfiles/
+
+# Django collected static files
+staticfiles/
