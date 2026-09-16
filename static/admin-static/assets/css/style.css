@@ -3979,10 +3979,10 @@ About Area
   }
 }
 
-.aboutarea__5__img {
+/* .aboutarea__5__img {
   background-image: url(../img/about/about_8.png);
   position: relative;
-}
+} */
 .aboutarea__5__img img {
   width: 100%;
   border-radius: 10px;
