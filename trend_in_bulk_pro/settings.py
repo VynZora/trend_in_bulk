@@ -20,8 +20,6 @@ ALLOWED_HOSTS = [
     "trendinbulk.com",
     "www.trendinbulk.com",
     "trend-in-bulk.onrender.com"
-    
-
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get(
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'trend_in_bulk_app',
+     'storages',
 ]
 
 # MIDDLEWARE
@@ -139,15 +138,100 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# STORAGES = {
+#     # Uploaded files: category images, product images, etc.
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+
+#     # Static CSS / JS / fonts / static images
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+
+# ==========================================
+# SUPABASE MEDIA STORAGE
+# ==========================================
+
+SUPABASE_S3_ENDPOINT = os.environ.get(
+    "SUPABASE_S3_ENDPOINT"
+)
+
+SUPABASE_S3_REGION = os.environ.get(
+    "SUPABASE_S3_REGION"
+)
+
+SUPABASE_S3_ACCESS_KEY_ID = os.environ.get(
+    "SUPABASE_S3_ACCESS_KEY_ID"
+)
+
+SUPABASE_S3_SECRET_ACCESS_KEY = os.environ.get(
+    "SUPABASE_S3_SECRET_ACCESS_KEY"
+)
+
+SUPABASE_STORAGE_DOMAIN = os.environ.get(
+    "SUPABASE_STORAGE_DOMAIN"
+)
+
+
 STORAGES = {
-    # Uploaded files: category images, product images, etc.
+
+    # ======================================
+    # USER-UPLOADED MEDIA
+    # Product images, category images, etc.
+    # ======================================
+
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3.S3Storage",
+
+        "OPTIONS": {
+
+            "access_key":
+                SUPABASE_S3_ACCESS_KEY_ID,
+
+            "secret_key":
+                SUPABASE_S3_SECRET_ACCESS_KEY,
+
+            "bucket_name":
+                "media",
+
+            "endpoint_url":
+                SUPABASE_S3_ENDPOINT,
+
+            "region_name":
+                SUPABASE_S3_REGION,
+
+            "addressing_style":
+                "path",
+
+            "signature_version":
+                "s3v4",
+
+            # Public bucket
+            "querystring_auth":
+                False,
+
+            # Prevent accidental overwrite
+            "file_overwrite":
+                False,
+
+            # Public URL used by browsers
+            "custom_domain":
+                SUPABASE_STORAGE_DOMAIN,
+        },
     },
 
-    # Static CSS / JS / fonts / static images
+
+    # ======================================
+    # STATIC CSS / JS / FONTS
+    # ======================================
+
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND":
+            "whitenoise.storage."
+            "CompressedManifestStaticFilesStorage",
     },
 }
 
