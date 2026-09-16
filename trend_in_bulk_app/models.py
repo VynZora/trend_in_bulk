@@ -1,10 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
 
-from .utils.image_optimizer import optimize_image
-
 
 class OptimizedImageModel(models.Model):
+
     image_fields = []
     square_image = False
 
@@ -12,12 +11,11 @@ class OptimizedImageModel(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        for field in self.image_fields:
-            image_field = getattr(self, field, None)
-            if image_field and hasattr(image_field, "path"):
-                optimize_image(image_field.path, force_square=self.square_image)
 
+        # Save normally.
+        # The configured Django storage backend
+        # handles the upload to Supabase S3.
+        super().save(*args, **kwargs)
 
 class WholesaleSeller(models.Model):
     name = models.CharField(max_length=200)
