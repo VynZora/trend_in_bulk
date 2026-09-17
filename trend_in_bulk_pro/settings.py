@@ -19,7 +19,8 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "trendinbulk.com",
     "www.trendinbulk.com",
-    "trend-in-bulk.onrender.com"
+    "trend-in-bulk.onrender.com",
+    "*",
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get(
